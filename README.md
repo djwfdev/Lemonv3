@@ -1,1 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Lemon - CSIT314 
+
+Major Project for CSIT314
+Autumn Semester, 2022
