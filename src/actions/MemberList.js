@@ -1,6 +1,9 @@
 import * as api from '../api/ApiIndex.js';
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+
+function setToken(userToken) {
+    sessionStorage.setItem('member', JSON.stringify(userToken));
+}
 
 export const getMembersBySearch = (searchQuery) => async (dispatch) => {
     try {
@@ -9,7 +12,7 @@ export const getMembersBySearch = (searchQuery) => async (dispatch) => {
             if(data){
                 //console.log(data);
                 alert("Found a member, directing to /service-request/member");
-                test(data.phoneNumber);
+                setToken(data); 
             } else {
                 alert("No member found");
             }
@@ -21,16 +24,3 @@ export const getMembersBySearch = (searchQuery) => async (dispatch) => {
         console.log(error);
     }
 }
-
-const test = (dataTest) => {
-    console.log(dataTest);
-
-    return (
-        <Navigate to='/service-request/member'/>
-        //<Navigate to={{pathname: '/service-request/member',
-        //state: {phoneNumber: dataTest}}}/>
-        //window.location.href = '/service-request/member';
-    );
-}
-
-export {test as default};

@@ -13,18 +13,26 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
 import { Theme } from '../components/Theme'; 
+import { useState } from 'react'
 
 import Footer from '../components/Footer';
 
+function setUser(user) {
+  sessionStorage.setItem('motorist', JSON.stringify(user));
+}
+
 export default function LoginMotorist() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const user = ({
+      username,
+      password
     });
-  };
+    setUser(user);
+  }
 
   return (
     <>
@@ -57,6 +65,7 @@ export default function LoginMotorist() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={e => setUserName(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -67,6 +76,7 @@ export default function LoginMotorist() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={e => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
